@@ -24,11 +24,13 @@ To get started with BioKwondo, follow these steps:
 1. **Clone the Repository**
 2. **Navigate to the BioKwondo Directory**
 3. **Install Dependencies**
-Ensure you have Python installed, and then install the required packages from requirements.txt:
+Ensure you have Python installed, and then install the required packages
+
+```pip install -r requirements.txt```
 
 
 ## Usage
 To use BioKwondo, run the main script from the command line:
-python biokwondo.py
+```python biokwondo.py```
 
 Ensure your webcam is connected and properly configured for real-time pose estimation.
