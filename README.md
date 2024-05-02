@@ -9,12 +9,14 @@ BioKwondo leverages advanced pose estimation and deep learning technologies to p
 - **Custom LSTM Models**: Deep learning models that provide detailed feedback for technique improvement.
 
 ## Repository Structure
-'''BioKwondo/
+'''
+BioKwondo/
 │
 ├── biokwondo.py # Main script for running the BioKwondo application
 ├── feedback_generation.py # Handles the generation of feedback based on model predictions
 ├── mp_helpers.py # Helper functions for MediaPipe operations
-└── Models/ # Trained models for action recognition and feedback generation'''
+└── Models/ # Trained models for action recognition and feedback generation
+'''
 
 ## Installation
 To get started with BioKwondo, follow these steps:
