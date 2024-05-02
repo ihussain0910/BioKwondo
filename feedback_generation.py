@@ -56,7 +56,7 @@ def angle_feedback_high(result,sentence):
         if r_elb < 100: 
             sentence += "Bend your elbow slighlty more by {} degrees".format(angle_elb)
         if r_elb > 130:
-           sentence += "Straighten your elbow more by {} degrees".format(-angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(-angle_elb)
         else:
             sentence += "Good straightness of the elbow"
 
@@ -246,12 +246,12 @@ def angle_feedback_low(result,sentence):
         angle_shoulder = 90-r_shoulder
         anlge_hip = 30 - r_hip_s
         if r_shoulder < 90:
-           sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(angle_shoulder)
+            sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(angle_shoulder)
         elif r_shoulder > 90:
             sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(-angle_shoulder)
         
         if r_hip_s < 30:
-           sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(anlge_hip)
+            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(anlge_hip)
 
         if r_hip_s > 60:
             sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(-anlge_hip)
@@ -264,7 +264,7 @@ def angle_feedback_low(result,sentence):
         angle_elb = 150 - l_elb
         #having greater kind of redundant as arm is allowed to be 180 degrees which is the maximum straightness
         if l_elb < 150: #
-           sentence += "Straighten your elbow more by {} degrees".format(angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(angle_elb)
         else:
             sentence += "Good straightness of the elbow"
 
@@ -272,12 +272,12 @@ def angle_feedback_low(result,sentence):
         angle_shoulder = 90-l_shoulder
         anlge_hip = 30 - l_hip_s
         if l_shoulder < 90:
-           sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(angle_shoulder)
+            sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(angle_shoulder)
         elif l_shoulder > 90:
             sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(-angle_shoulder)
         
         if l_hip_s < 30:
-           sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(anlge_hip)
+            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(anlge_hip)
 
         if l_hip_s > 60:
             sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(-anlge_hip)
