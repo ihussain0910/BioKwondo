@@ -25,7 +25,6 @@ To get started with BioKwondo, follow these steps:
 2. **Navigate to the BioKwondo Directory**
 3. **Install Dependencies**
 Ensure you have Python installed, and then install the required packages
-
 ```pip install -r requirements.txt```
 
 
