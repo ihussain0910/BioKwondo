@@ -278,7 +278,7 @@ def angle_feedback_low(result,sentence):
             sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(np.round(-angle_shoulder).astype(int))
         
         if l_hip_s < 30:
-            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(np.round(anlge_hip).astype(int))
+            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(np.round(angle_hip).astype(int))
 
         if l_hip_s > 60:
             sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(np.round(-angle_hip).astype(int))
