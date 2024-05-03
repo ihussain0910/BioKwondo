@@ -20,9 +20,12 @@ def prob_viz(res, actions, input_frame, colors):
     return output_frame
 
 engine = pyttsx3.init() # for audio feedback
-
+voices = engine.getProperty('voices')
+engine.setProperty('rate', 125)
+engine.setProperty('voice', voices[1].id)
 holistic = mp.solutions.holistic
 drawing = mp.solutions.drawing_utils
+
 action_model = load_model('Models/kcross_action.keras')
 
 low_cross = load_model('Models/low_cross_model.keras')
