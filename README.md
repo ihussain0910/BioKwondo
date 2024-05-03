@@ -34,7 +34,7 @@ To use BioKwondo, run the main script from the command line:
 
 Ensure your webcam is connected and properly configured for real-time pose estimation.
 
-##MediaPipe
+## MediaPipe
 
 This project uses MediaPipe for Pose estimation and follows the functions and pre-processing outlined in https://developers.google.com/mediapipe
 
