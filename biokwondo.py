@@ -64,7 +64,6 @@ with holistic.Holistic(min_detection_confidence=0.7, min_tracking_confidence=0.7
         # Draw landmarks
         mp_helpers.landmark_draw(image, results)
 
-        # 2. Prediction logic
         keypoints, p_points = mp_helpers.get_landmarks(results)
 
         sequence_a.append(keypoints)
@@ -87,7 +86,6 @@ with holistic.Holistic(min_detection_confidence=0.7, min_tracking_confidence=0.7
             predictions.append(np.argmax(res))
             image = prob_viz(res, action, image, (245,117,16))
 
-        #3. Viz logic
             if np.unique(predictions[-1:])[0]==np.argmax(res) and (sequence_f != None): 
                 if res[np.argmax(res)] > threshold: 
                     
