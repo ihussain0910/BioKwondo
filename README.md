@@ -33,3 +33,14 @@ To use BioKwondo, run the main script from the command line:
 ```python biokwondo.py```
 
 Ensure your webcam is connected and properly configured for real-time pose estimation.
+
+##MediaPipe
+
+This project uses MediaPipe for Pose estimation and follows the functions and pre-processing outlined in https://developers.google.com/mediapipe
+
+```
+Camillo Lugaresi, Jiuqiang Tang, Hadon Nash, Chris McClanahan, Esha Uboweja,
+Michael Hays, Fan Zhang, Chuo-Ling Chang, Ming Guang Yong, Juhyun Lee,
+et al . 2019. Mediapipe: A framework for building perception pipelines. arXiv
+preprint arXiv:1906.08172 (2019)
+```
