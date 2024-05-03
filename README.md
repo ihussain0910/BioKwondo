@@ -5,6 +5,10 @@ BioKwondo leverages advanced pose estimation and deep learning technologies to p
 
 ![BioKwondo GIF](https://github.com/ihussain0910/BioKwondo/blob/main/BioKwondo%20Demo%20GIF.gif)
 
+To see BioKwondo in action, watch the demonstration video here:
+[![BioKwondo Demo](https://github.com/<username>/BioKwondo/blob/main/BioKwondo Demo.mp4)
+
+Please note once the feedback is being said to the user the live feed freezes until the feedback is completed.
 ## Features
 - **Real-time Feedback**: Immediate analysis and feedback on Taekwondo techniques.
 - **Pose Estimation**: Utilises single-view markerless 3D pose estimation to track movements.
