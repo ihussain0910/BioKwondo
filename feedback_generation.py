@@ -11,6 +11,7 @@ def calc_angle(x,y,z):
             
     return angle 
 
+
 def angle_feedback_high(result,sentence):
     #getting angle between two points to provide feedback
 
@@ -54,9 +55,9 @@ def angle_feedback_high(result,sentence):
         #checking elbow bend
         angle_elb = 100 - r_elb
         if r_elb < 100: 
-            sentence += "Bend your elbow slighlty more by {} degrees".format(angle_elb)
+            sentence += "Bend your elbow slighlty more by {} degrees".format(np.round(angle_elb).astype(int))
         if r_elb > 130:
-            sentence += "Straighten your elbow more by {} degrees".format(-angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(np.round(-angle_elb).astype(int))
         else:
             sentence += "Good straightness of the elbow"
 
@@ -64,23 +65,23 @@ def angle_feedback_high(result,sentence):
         angle_f = 140-r_hip
         angle_s = 140-r_hip_s
         if r_hip < 140:
-            sentence += ", also move your arm roughly {} degrees to the left".format(angle_f)
+            sentence += ", also move your arm roughly {} degrees to the left".format(np.round(angle_f).astype(int))
         elif r_hip > 170:
-            sentence += ", also move your arm roughly {} degrees to the right its too to the left of your head".format(-angle_f)
+            sentence += ", also move your arm roughly {} degrees to the right its too to the left of your head".format(np.round(-angle_f))
 
         if r_hip_s < 140:
-            sentence += ", also move your arm roughly {} degrees backwards its too in front of you".format(angle_s)
+            sentence += ", also move your arm roughly {} degrees backwards its too in front of you".format(np.round(angle_s).astype(int))
         if r_hip_s > 170:
-            sentence += ", also move your arm roughly {} degrees forwards its too much behind your head".format(-angle_s)
+            sentence += ", also move your arm roughly {} degrees forwards its too much behind your head".format(np.round(-angle_s).astype(int))
         else:
             sentence += ", correct arm position for the high rising block"
 
     else: # left hand has been used to block
         angle_elb = 100 - l_elb
         if l_elb < 100:
-            sentence += "Bend your elbow slighlty more by {} degrees".format(angle_elb)
+            sentence += "Bend your elbow slighlty more by {} degrees".format(np.round(angle_elb).astype(int))
         if l_elb > 130:
-            sentence += "Straighten your elbow more by {} degrees".format(-angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(np.round(-angle_elb).astype(int))
         else:
             sentence += "Good straightness of the elbow"
 
@@ -88,14 +89,14 @@ def angle_feedback_high(result,sentence):
         angle_f = 140-l_hip
         angle_s = 140-l_hip_s
         if r_hip < 140:
-            sentence += ", also move your arm roughly {} degrees to the right".format(angle_f)
+            sentence += ", also move your arm roughly {} degrees to the right".format(np.round(angle_f).astype(int))
         elif r_hip > 170:
-            sentence += ", also move your arm roughly {} degrees to the right its too to the right of your head".format(-angle_f)
+            sentence += ", also move your arm roughly {} degrees to the right its too to the right of your head".format(np.round(-angle_f).astype(int))
 
         if r_hip_s < 140:
-            sentence += ", also move your arm roughly {} degrees backwards its too in front of you".format(angle_s)
+            sentence += ", also move your arm roughly {} degrees backwards its too in front of you".format(np.round(angle_s).astype(int))
         if r_hip_s > 170:
-            sentence += ", also move your arm roughly {} degrees forwards its too much behind your head".format(-angle_s)
+            sentence += ", also move your arm roughly {} degrees forwards its too much behind your head".format(np.round(-angle_s).astype(int))
         else:
             sentence += ", correct arm position for the high rising block"
 
@@ -119,7 +120,6 @@ def angle_feedback_inner(result,sentence):
     r_hip_s = calc_angle(right_hip_s, right_shoulder_s, right_elbow_s)
     r_elb_s = calc_angle(right_shoulder_s,right_elbow_s,right_wrist_s)
 
-    r_shoulder = calc_angle(right_elbow,right_shoulder,left_shoulder)
 
     left_elbow = [result.pose_landmarks.landmark[13].x, result.pose_landmarks.landmark[13].y]
     left_wrist = [result.pose_landmarks.landmark[15].x, result.pose_landmarks.landmark[15].y]
@@ -137,6 +137,7 @@ def angle_feedback_inner(result,sentence):
     l_hip_s = calc_angle(left_hip_s,left_shoulder_s,left_elbow_s)
     l_shoulder = calc_angle(left_elbow,left_shoulder,right_shoulder)
     l_elb_s = calc_angle(left_shoulder_s, left_elbow_s, left_wrist_s)
+    r_shoulder = calc_angle(right_elbow,right_shoulder,left_shoulder)
 
 
     if r_shoulder > 40 and r_shoulder < 150: # means the right hand has been used to block
@@ -144,9 +145,9 @@ def angle_feedback_inner(result,sentence):
         #checking elbow bend
         angle_elb = 100 - r_elb_s
         if r_elb_s < 90: 
-            sentence += "Bend your elbow slighlty more by {} degrees".format(angle_elb)
+            sentence += "Bend your elbow slighlty more by {} degrees".format(np.round(angle_elb).astype(int))
         if r_elb_s > 120:
-            sentence += "Straighten your elbow more by {} degrees".format(-angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(np.round(-angle_elb).astype(int))
         else:
             sentence += "Good straightness of the elbow"
 
@@ -154,15 +155,15 @@ def angle_feedback_inner(result,sentence):
         angle_shoulder = 60-r_shoulder
         anlge_hip = 20 - r_hip_s
         if r_shoulder < 60:
-            sentence += ", Move your arm to the right more by {} degrees so the elbow is in front of your right shoulder".format(angle_shoulder)
+            sentence += ", Move your arm to the right more by {} degrees so the elbow is in front of your right shoulder".format(np.round(angle_shoulder).astype(int))
         elif r_shoulder > 90:
-            sentence += ", Move your arm to the left more by {} degrees so the elbow is in front of your right shoulder".format(-angle_shoulder)
+            sentence += ", Move your arm to the left more by {} degrees so the elbow is in front of your right shoulder".format(np.round(-angle_shoulder).astype(int))
         
         if r_hip_s < 25:
-            sentence += ", Move your arm slighlty up more by {} degrees".format(anlge_hip)
+            sentence += ", Move your arm slighlty up more by {} degrees".format(np.round(anlge_hip).astype(int))
 
         if r_hip_s > 45:
-            sentence +=  ", Move your arm slighlty down more by {} degrees".format(-anlge_hip)
+            sentence +=  ", Move your arm slighlty down more by {} degrees".format(np.round(-anlge_hip).astype(int))
         else:
             sentence += ", correct arm position for the inner forearm block"
         
@@ -170,9 +171,9 @@ def angle_feedback_inner(result,sentence):
         #checking elbow bend
         angle_elb = 100 - l_elb_s
         if l_elb_s < 90: 
-            sentence += "Bend your elbow slighlty more by {} degrees".format(angle_elb)
+            sentence += "Bend your elbow slighlty more by {} degrees".format(np.round(angle_elb).astype(int))
         if l_elb_s > 120:
-            sentence += "Straighten your elbow more by {} degrees".format(-angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(np.round(-angle_elb).astype(int))
         else:
             sentence += "Good straightness of the elbow"
 
@@ -180,15 +181,15 @@ def angle_feedback_inner(result,sentence):
         angle_shoulder = 60-l_shoulder
         anlge_hip = 20 - l_hip_s
         if l_shoulder < 60:
-            sentence += ", Move your arm to the left more by {} degrees so the elbow is in front of your left shoulder".format(angle_shoulder)
+            sentence += ", Move your arm to the left more by {} degrees so the elbow is in front of your left shoulder".format(np.round(angle_shoulder).astype(int))
         elif l_shoulder > 90:
-            sentence += ", Move your arm to the right more by {} degrees so the elbow is in front of your left shoulder".format(-angle_shoulder)
+            sentence += ", Move your arm to the right more by {} degrees so the elbow is in front of your left shoulder".format(np.round(-angle_shoulder).astype(int))
         
         if l_hip_s < 25:
-            sentence += ", Move your arm slighlty up more by {} degrees".format(anlge_hip)
+            sentence += ", Move your arm slighlty up more by {} degrees".format(np.round(anlge_hip).astype(int))
 
         if l_hip_s > 45:
-            sentence += ", Move your down slighlty more by {} degrees".format(-anlge_hip)
+            sentence += ", Move your down slighlty more by {} degrees".format(np.round(-anlge_hip).astype(int))
         else:
             sentence += ", correct arm position for the inner forearm block"
 
@@ -212,7 +213,6 @@ def angle_feedback_low(result,sentence):
     r_hip_s = calc_angle(right_hip_s, right_shoulder_s, right_elbow_s)
     r_elb_s = calc_angle(right_shoulder_s,right_elbow_s,right_wrist_s)
 
-    r_shoulder = calc_angle(right_elbow,right_shoulder,left_shoulder)
 
     left_elbow = [result.pose_landmarks.landmark[13].x, result.pose_landmarks.landmark[13].y]
     left_wrist = [result.pose_landmarks.landmark[15].x, result.pose_landmarks.landmark[15].y]
@@ -230,6 +230,7 @@ def angle_feedback_low(result,sentence):
     l_hip_s = calc_angle(left_hip_s,left_shoulder_s,left_elbow_s)
     l_shoulder = calc_angle(left_elbow,left_shoulder,right_shoulder)
     l_elb_s = calc_angle(left_shoulder_s, left_elbow_s, left_wrist_s)
+    r_shoulder = calc_angle(right_elbow,right_shoulder,left_shoulder)
 
 
     if r_shoulder > 70 and r_shoulder < 150: # means the right hand has been used to block
@@ -238,23 +239,23 @@ def angle_feedback_low(result,sentence):
         angle_elb = 150 - r_elb
         #having greater kind of redundant as arm is allowed to be 180 degrees which is the maximum straightness
         if r_elb < 150: #
-            sentence += "Straighten your elbow more by {} degrees".format(angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(np.round(angle_elb).astype(int))
         else:
             sentence += "Good straightness of the elbow"
 
 
         angle_shoulder = 90-r_shoulder
-        anlge_hip = 30 - r_hip_s
+        angle_hip = 30 - r_hip_s
         if r_shoulder < 90:
-            sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(angle_shoulder)
+            sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(np.round(angle_shoulder).astype(int))
         elif r_shoulder > 90:
-            sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(-angle_shoulder)
+            sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(np.round(-angle_shoulder).astype(int))
         
         if r_hip_s < 30:
-            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(anlge_hip)
+            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(np.round(angle_hip).astype(int))
 
         if r_hip_s > 60:
-            sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(-anlge_hip)
+            sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(np.round(-angle_hip).astype(int))
         else:
             sentence += ", correct arm position for the inner forearm block"
         
@@ -264,23 +265,23 @@ def angle_feedback_low(result,sentence):
         angle_elb = 150 - l_elb
         #having greater kind of redundant as arm is allowed to be 180 degrees which is the maximum straightness
         if l_elb < 150: #
-            sentence += "Straighten your elbow more by {} degrees".format(angle_elb)
+            sentence += "Straighten your elbow more by {} degrees".format(np.round(angle_elb))
         else:
             sentence += "Good straightness of the elbow"
 
 
         angle_shoulder = 90-l_shoulder
-        anlge_hip = 30 - l_hip_s
+        angle_hip = 30 - l_hip_s
         if l_shoulder < 90:
-            sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(angle_shoulder)
+            sentence += ", Move your arm to the left more by {} degrees so the arm is in front of your right knee".format(np.round(angle_shoulder).astype(int))
         elif l_shoulder > 90:
-            sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(-angle_shoulder)
+            sentence += ", Move your arm to the right more by {} degrees so the arm is in front of your right knee".format(np.round(-angle_shoulder).astype(int))
         
         if l_hip_s < 30:
-            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(anlge_hip)
+            sentence += ", Your arm is too close to your body, move it in front of you more by {} degrees".format(np.round(anlge_hip).astype(int))
 
         if l_hip_s > 60:
-            sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(-anlge_hip)
+            sentence +=  ", Your arm is too far from your body, move it closer to you by {} degrees".format(np.round(-angle_hip).astype(int))
         else:
             sentence += ", correct arm position for the inner forearm block"
 
@@ -317,3 +318,4 @@ def second_feedback_model(sequence,model,sentence,a):
                 sentence += ", for the high rising block make sure the the chamber starts with your arms performing a cross in front of you with the blocking arm horizontal and in front of the other arm which is vertical"
 
         return sentence
+    
