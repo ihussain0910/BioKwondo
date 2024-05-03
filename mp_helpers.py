@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 
+# We follow the outlined framework provided by MediaPipe https://developers.google.com/mediapipe, for detection, pre prcocessing and frame reading
+# All functions are taken from MediaPipe in this file
 def detect(image, model):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB) 
     image.flags.writeable = False                  
