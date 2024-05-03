@@ -9,7 +9,7 @@ import mp_helpers
 import pyttsx3
 
 
-# We follow the ooutlined framework provided by MediaPipe https://developers.google.com/mediapipe, for detection, pre prcocessing and frame reading
+# We follow the outlined framework provided by MediaPipe https://developers.google.com/mediapipe, for detection, pre prcocessing and frame reading
 
 def prob_viz(res, actions, input_frame, colors):
     output_frame = input_frame.copy()
