@@ -3,6 +3,8 @@
 ## Overview
 BioKwondo leverages advanced pose estimation and deep learning technologies to provide real-time biomechanical feedback for Taekwondo practitioners. By analysing techniques and offering corrections, BioKwondo enhances the precision and accuracy of Taekwondo forms, making it a valuable tool for athletes of all levels.
 
+![BioKwondo GIF](https://github.com/ihussain0910/BioKwondo/blob/main/BioKwondo%20Demo%20GIF.gif)
+
 ## Features
 - **Real-time Feedback**: Immediate analysis and feedback on Taekwondo techniques.
 - **Pose Estimation**: Utilises single-view markerless 3D pose estimation to track movements.
