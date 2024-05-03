@@ -8,13 +8,13 @@ import feedback_generation
 import mp_helpers
 import pyttsx3
 
-def prob_viz(res, input_frame):
+colors = [(245,117,16), (117,245,16), (16,117,245)]
+def prob_viz(res, actions, input_frame, colors):
     output_frame = input_frame.copy()
-    cv2.rectangle(output_frame, (0,0), (220, 210), (255,255,255), -1)
-
     for num, prob in enumerate(res):
-        cv2.rectangle(output_frame, (0,50+num*40), (int(prob*100), 0+num*40), (245,117,16), -1)
-        cv2.putText(output_frame, action[num], (0, 30+num*40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2, cv2.LINE_AA)
+        cv2.rectangle(output_frame, (0,60+num*40), (int(prob*100), 90+num*40), colors[0], -1)
+        cv2.putText(output_frame, action[num], (0, 85+num*40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+        
     return output_frame
 
 engine = pyttsx3.init() # for audio feedback
@@ -50,21 +50,20 @@ print("Frame size ", (frame_width, frame_height))
 print("Video FPS: ", cap.get(cv2.CAP_PROP_FPS))
 
 print("testong")
-# Set mediapipe model 
-with holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as h:
+with holistic.Holistic(min_detection_confidence=0.7, min_tracking_confidence=0.7) as h:
     while cap.isOpened():
         # Read feed
         ret, frame = cap.read()
 
         # Make detections
-        image, results = mp_helpers.detect(frame, h)
+        image, results = detect(frame, h)
        # print(results)
         
         # Draw landmarks
-        mp_helpers.landmark_draw(image, results)
+        landmark_draw(image, results)
 
         # 2. Prediction logic
-        keypoints, p_points = mp_helpers.get_landmarks(results)
+        keypoints, p_points = get_landmarks(results)
 
         sequence_a.append(keypoints)
         sequence_f.append(keypoints)
@@ -76,7 +75,7 @@ with holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5
 
         
         
-        if len(sequence_a) == 20 and (sequence_a != None):
+        if len(sequence_f) == 60 and (sequence_f != None):
             
             #angle1,angle2, point1,point2 = test_hand(results)
             #cv2.putText(image, str(angle1), tuple(point1),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
@@ -94,20 +93,20 @@ with holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5
                     print(action[np.argmax(res)])
                     speak = ""
                     if action[np.argmax(res)] == action[0]: #Low Section Detected
-                        speak = feedback_generation.first_feedback_model(sequence_f[:20],low_hands,speak)
-                        speak = feedback_generation.second_feedback_model(sequence_f[20:40],low_cross,speak,action[0])
-                        speak = feedback_generation.angle_feedback_low(results,speak)
+                        speak = first_feedback_model(sequence_f[:20],low_hands,speak)
+                        speak = second_feedback_model(sequence_f[20:40],low_cross,speak,action[0])
+                        speak = angle_feedback_low(results,speak)
 
                     if action[np.argmax(res)] == action[1]: #Inner Section Detected
-                        speak = feedback_generation.first_feedback_model(sequence_f[:20],inner_hands,speak)
-                        speak = feedback_generation.second_feedback_model(sequence_f[20:40],inner_cross,speak,action[1])
-                        speak = feedback_generation.angle_feedback_low(results,speak)
+                        speak = first_feedback_model(sequence_f[:20],inner_hands,speak)
+                        speak = second_feedback_model(sequence_f[20:40],inner_cross,speak,action[1])
+                        speak = angle_feedback_low(results,speak)
 
                     
                     if action[np.argmax(res)] == action[2]: #High Section Detected
-                        speak = feedback_generation.first_feedback_model(sequence_f[:20],high_hands,speak)
-                        speak = feedback_generation.second_feedback_model(sequence_f[20:40],high_cross,speak,action[2])
-                        speak = feedback_generation.angle_feedback_low(results,speak)
+                        speak = first_feedback_model(sequence_f[:20],high_hands,speak)
+                        speak = second_feedback_model(sequence_f[20:40],high_cross,speak,action[2])
+                        speak = angle_feedback_low(results,speak)
 
                     engine.say(speak)
                     engine.runAndWait()
@@ -119,8 +118,8 @@ with holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5
                         sentence.append(action[np.argmax(res)])
                     
 
-            if len(sentence) > 5: 
-                sentence = sentence[-5:]
+            if len(sentence) > 60: 
+                sentence = sentence[-60:]
 
             image = prob_viz(res, action, image, (245,117,16))
 
